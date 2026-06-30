@@ -81,8 +81,8 @@ def load_model():
     model_path = str(base_dir / "model" / "best_model.h5")
 
     try:
-        import tf_keras
-        model = tf_keras.models.load_model(model_path, compile=False)
+        import tensorflow as tf
+        model = tf.keras.models.load_model(model_path, compile=False)
         predictor = TomatoDiseasePredictor(model_path)
         predictor.model = model
         return predictor
