@@ -4,8 +4,10 @@ Handles model loading and prediction operations
 """
 
 import numpy as np
+import os
+os.environ["TF_USE_LEGACY_KERAS"] = "1"
 import tensorflow as tf
-from tensorflow import keras
+import tf_keras as keras
 from typing import Dict, List, Tuple
 import time
 

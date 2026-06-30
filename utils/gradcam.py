@@ -4,8 +4,10 @@ Generates Class Activation Mapping to visualize model predictions
 """
 
 import numpy as np
+import os
+os.environ["TF_USE_LEGACY_KERAS"] = "1"
 import tensorflow as tf
-from tensorflow import keras
+import tf_keras as keras
 import cv2
 from PIL import Image
 from typing import Tuple

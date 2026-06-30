@@ -73,16 +73,17 @@ if 'prediction_history' not in st.session_state:
 @st.cache_resource
 def load_model():
     """Load the trained model (cached)"""
-    import os
     import traceback
-    # Use absolute path relative to this script's location
+    import os
+    os.environ["TF_USE_LEGACY_KERAS"] = "1"
+
     base_dir = Path(__file__).parent
     model_path = str(base_dir / "model" / "best_model.h5")
 
-    predictor = TomatoDiseasePredictor(model_path)
     try:
-        from tensorflow import keras
-        model = keras.models.load_model(model_path, compile=False)
+        import tf_keras
+        model = tf_keras.models.load_model(model_path, compile=False)
+        predictor = TomatoDiseasePredictor(model_path)
         predictor.model = model
         return predictor
     except Exception as e:
