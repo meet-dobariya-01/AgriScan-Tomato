@@ -32,8 +32,8 @@ env/
 .ipynb_checkpoints
 *.ipynb_checkpoints
 
-# Streamlit
-.streamlit/
+# Streamlit (config is needed for deployment — do NOT ignore)
+# .streamlit/
 
 # IDE
 .vscode/
