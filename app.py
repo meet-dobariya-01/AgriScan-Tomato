@@ -73,7 +73,9 @@ if 'prediction_history' not in st.session_state:
 @st.cache_resource
 def load_model():
     """Load the trained model (cached)"""
-    model_path = os.path.join("model", "best_model.h5")
+    # Use absolute path relative to this script's location
+    base_dir = Path(__file__).parent
+    model_path = str(base_dir / "model" / "best_model.h5")
     predictor = TomatoDiseasePredictor(model_path)
     if predictor.load_model():
         return predictor
