@@ -74,19 +74,21 @@ if 'prediction_history' not in st.session_state:
 def load_model():
     """Load the trained model (cached)"""
     import os
+    import traceback
     # Use absolute path relative to this script's location
     base_dir = Path(__file__).parent
     model_path = str(base_dir / "model" / "best_model.h5")
-    
-    # Debug info
-    st.write(f"🔍 Looking for model at: `{model_path}`")
-    st.write(f"📁 File exists: `{os.path.exists(model_path)}`")
-    st.write(f"📂 Files in model dir: `{os.listdir(str(base_dir / 'model')) if os.path.exists(str(base_dir / 'model')) else 'model dir missing'}`")
-    
+
     predictor = TomatoDiseasePredictor(model_path)
-    if predictor.load_model():
+    try:
+        from tensorflow import keras
+        model = keras.models.load_model(model_path, compile=False)
+        predictor.model = model
         return predictor
-    return None
+    except Exception as e:
+        st.error(f"❌ Load error: {str(e)}")
+        st.code(traceback.format_exc())
+        return None
 
 
 def create_confidence_gauge(confidence: float):
