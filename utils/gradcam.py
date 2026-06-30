@@ -16,178 +16,129 @@ class GradCAM:
     Gradient-weighted Class Activation Mapping (Grad-CAM)
     Visualizes which parts of the image the model focuses on
     """
-    
+
     def __init__(self, model, layer_name: str = None):
-        """
-        Initialize Grad-CAM
-        
-        Args:
-            model: Trained Keras model
-            layer_name: Name of the layer to visualize (default: last conv layer)
-        """
         self.model = model
-        
-        # Find the last convolutional layer if not specified
+
         if layer_name is None:
-            for layer in reversed(model.layers):
-                if hasattr(layer, 'filters') or 'conv' in layer.name.lower():
-                    layer_name = layer.name
-                    break
-            # Fallback to known EfficientNetB0 last conv layer
-            if layer_name is None:
-                layer_name = "top_conv"
-        
+            layer_name = self._find_last_conv_layer(model)
+
         self.layer_name = layer_name
         self.grad_model = self._build_grad_model()
-    
+
+    def _find_last_conv_layer(self, model):
+        """Find the last conv layer, searching inside sub-models too (Keras 3)"""
+        # First try top-level layers
+        for layer in reversed(model.layers):
+            if 'conv' in layer.name.lower():
+                return layer.name
+
+        # Search inside sub-models (EfficientNet is wrapped in Keras 3)
+        for layer in reversed(model.layers):
+            if hasattr(layer, 'layers'):
+                for sub_layer in reversed(layer.layers):
+                    if 'conv' in sub_layer.name.lower():
+                        return sub_layer.name
+
+        # Known fallbacks for EfficientNetB0
+        for name in ["top_conv", "block7a_project_conv", "stem_conv"]:
+            try:
+                model.get_layer(name)
+                return name
+            except Exception:
+                continue
+
+        return None
+
     def _build_grad_model(self):
         """Build gradient model for Grad-CAM"""
+        if self.layer_name is None:
+            return None
         try:
-            # Get the target layer
             target_layer = self.model.get_layer(self.layer_name)
-            
-            # Create a model that maps input to target layer output and final predictions
             grad_model = keras.models.Model(
                 inputs=[self.model.input],
                 outputs=[target_layer.output, self.model.output]
             )
             return grad_model
-        except:
-            # If specific layer not found, use a default approach
+        except Exception as e:
+            print(f"Grad-CAM model build failed: {e}")
             return None
-    
-    def generate_heatmap(
-        self, 
-        image_array: np.ndarray, 
-        pred_index: int = None
-    ) -> np.ndarray:
-        """
-        Generate Grad-CAM heatmap
-        
-        Args:
-            image_array: Preprocessed image array
-            pred_index: Index of the class to visualize (default: predicted class)
-            
-        Returns:
-            Heatmap as numpy array
-        """
+
+    def generate_heatmap(self, image_array: np.ndarray, pred_index: int = None) -> np.ndarray:
         if self.grad_model is None:
-            # Return empty heatmap if grad model creation failed
-            return np.zeros((224, 224))
-        
+            return np.zeros((7, 7))
+
         try:
-            # Record operations for automatic differentiation
+            image_tensor = tf.cast(image_array, tf.float32)
+
             with tf.GradientTape() as tape:
-                # Get conv layer output and predictions
-                conv_outputs, predictions = self.grad_model(image_array)
-                
-                # If no pred_index specified, use the top prediction
+                conv_outputs, predictions = self.grad_model(image_tensor, training=False)
+                tape.watch(conv_outputs)
+
                 if pred_index is None:
-                    pred_index = tf.argmax(predictions[0])
-                
-                # Get the score for the predicted class
+                    pred_index = int(tf.argmax(predictions[0]))
+
                 class_channel = predictions[:, pred_index]
-            
-            # Compute gradients of the class score with respect to conv layer output
+
             grads = tape.gradient(class_channel, conv_outputs)
-            
-            # Compute the guided gradients
+
+            if grads is None:
+                return np.zeros((7, 7))
+
             pooled_grads = tf.reduce_mean(grads, axis=(0, 1, 2))
-            
-            # Multiply each channel by its importance weight
-            conv_outputs = conv_outputs[0]
-            heatmap = conv_outputs @ pooled_grads[..., tf.newaxis]
+            conv_out = conv_outputs[0]
+            heatmap = conv_out @ pooled_grads[..., tf.newaxis]
             heatmap = tf.squeeze(heatmap)
-            
-            # Normalize heatmap
-            heatmap = tf.maximum(heatmap, 0)
-            max_val = tf.math.reduce_max(heatmap)
+
+            # ReLU + normalize
+            heatmap = tf.maximum(heatmap, 0).numpy()
+            max_val = heatmap.max()
             if max_val > 0:
                 heatmap = heatmap / max_val
-            heatmap = heatmap.numpy()
-            
+
             return heatmap
-        
+
         except Exception as e:
-            print(f"Error generating heatmap: {str(e)}")
-            return np.zeros((7, 7))  # Return default size heatmap
-    
+            print(f"Heatmap generation error: {e}")
+            return np.zeros((7, 7))
+
     def overlay_heatmap(
-        self, 
-        heatmap: np.ndarray, 
+        self,
+        heatmap: np.ndarray,
         original_image: Image.Image,
-        alpha: float = 0.4,
+        alpha: float = 0.5,
         colormap: int = cv2.COLORMAP_JET
     ) -> Tuple[np.ndarray, np.ndarray, np.ndarray]:
-        """
-        Overlay heatmap on original image
-        
-        Args:
-            heatmap: Generated heatmap
-            original_image: Original PIL Image
-            alpha: Transparency of heatmap overlay
-            colormap: OpenCV colormap to use
-            
-        Returns:
-            Tuple of (heatmap_colored, original_resized, superimposed)
-        """
         try:
-            # Resize heatmap to match original image size
             heatmap_resized = cv2.resize(heatmap, (224, 224))
-            
-            # Convert heatmap to RGB
-            heatmap_colored = np.uint8(255 * heatmap_resized)
-            heatmap_colored = cv2.applyColorMap(heatmap_colored, colormap)
+            heatmap_uint8 = np.uint8(255 * heatmap_resized)
+            heatmap_colored = cv2.applyColorMap(heatmap_uint8, colormap)
             heatmap_colored = cv2.cvtColor(heatmap_colored, cv2.COLOR_BGR2RGB)
-            
-            # Resize original image
-            original_resized = original_image.resize((224, 224))
+
+            original_resized = original_image.convert("RGB").resize((224, 224))
             original_array = np.array(original_resized)
-            
-            # Superimpose heatmap on original image
-            superimposed = cv2.addWeighted(
-                original_array, 
-                1 - alpha, 
-                heatmap_colored, 
-                alpha, 
-                0
-            )
-            
+
+            superimposed = cv2.addWeighted(original_array, 1 - alpha, heatmap_colored, alpha, 0)
+
             return heatmap_colored, original_array, superimposed
-        
+
         except Exception as e:
-            print(f"Error overlaying heatmap: {str(e)}")
-            # Return default images
+            print(f"Overlay error: {e}")
             default = np.zeros((224, 224, 3), dtype=np.uint8)
             return default, default, default
-    
+
     def generate_gradcam(
-        self, 
+        self,
         image_array: np.ndarray,
         original_image: Image.Image,
         pred_index: int = None,
-        alpha: float = 0.4
+        alpha: float = 0.5
     ) -> dict:
-        """
-        Generate complete Grad-CAM visualization
-        
-        Args:
-            image_array: Preprocessed image array
-            original_image: Original PIL Image
-            pred_index: Class index to visualize
-            alpha: Overlay transparency
-            
-        Returns:
-            Dictionary containing all visualization components
-        """
-        # Generate heatmap
         heatmap = self.generate_heatmap(image_array, pred_index)
-        
-        # Overlay on original image
         heatmap_colored, original_array, superimposed = self.overlay_heatmap(
             heatmap, original_image, alpha
         )
-        
         return {
             "heatmap": heatmap_colored,
             "original": original_array,
