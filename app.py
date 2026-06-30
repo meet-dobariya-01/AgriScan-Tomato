@@ -74,9 +74,6 @@ if 'prediction_history' not in st.session_state:
 def load_model():
     """Load the trained model (cached)"""
     import traceback
-    import os
-    os.environ["TF_USE_LEGACY_KERAS"] = "1"
-
     base_dir = Path(__file__).parent
     model_path = str(base_dir / "model" / "best_model.h5")
 
