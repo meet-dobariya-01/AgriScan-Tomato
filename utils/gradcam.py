@@ -30,9 +30,12 @@ class GradCAM:
         # Find the last convolutional layer if not specified
         if layer_name is None:
             for layer in reversed(model.layers):
-                if 'conv' in layer.name.lower():
+                if hasattr(layer, 'filters') or 'conv' in layer.name.lower():
                     layer_name = layer.name
                     break
+            # Fallback to known EfficientNetB0 last conv layer
+            if layer_name is None:
+                layer_name = "top_conv"
         
         self.layer_name = layer_name
         self.grad_model = self._build_grad_model()
@@ -97,7 +100,10 @@ class GradCAM:
             heatmap = tf.squeeze(heatmap)
             
             # Normalize heatmap
-            heatmap = tf.maximum(heatmap, 0) / tf.math.reduce_max(heatmap)
+            heatmap = tf.maximum(heatmap, 0)
+            max_val = tf.math.reduce_max(heatmap)
+            if max_val > 0:
+                heatmap = heatmap / max_val
             heatmap = heatmap.numpy()
             
             return heatmap
