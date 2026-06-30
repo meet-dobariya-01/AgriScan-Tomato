@@ -41,8 +41,22 @@ class TomatoDiseasePredictor:
     
     def load_model(self):
         """Load the trained model"""
+        import os
+        if not os.path.exists(self.model_path):
+            print(f"❌ Model file not found at {self.model_path}")
+            return False
         try:
-            self.model = keras.models.load_model(self.model_path)
+            # Try loading without recompiling first (handles cross-version compatibility)
+            self.model = keras.models.load_model(
+                self.model_path,
+                compile=False
+            )
+            # Recompile with basic settings
+            self.model.compile(
+                optimizer='adam',
+                loss='sparse_categorical_crossentropy',
+                metrics=['accuracy']
+            )
             print(f"✅ Model loaded successfully from {self.model_path}")
             return True
         except Exception as e:
