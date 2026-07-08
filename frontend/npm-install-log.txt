@@ -1,0 +1,416 @@
+﻿node.exe : npm verbose cli C:\Program Files\nodejs\node.exe 
+C:\Users\MEET\AppData\Roaming\npm\node_modules\npm\bin\npm-cli.js
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Users\MEET\AppData\Roaming\n ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (npm verbose cli...\bin\npm-cli.js 
+   :String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+npm info using npm@11.12.1
+npm info using node@v22.19.0
+npm verbose title npm install
+npm verbose argv "install" "--loglevel" "verbose"
+npm verbose logfile logs-max:10 
+dir:C:\Users\MEET\AppData\Local\npm-cache\_logs\2026-07-03T09_48_22_837Z-
+npm verbose logfile C:\Users\MEET\AppData\Local\npm-cache\_logs\2026-07-03T09_4
+8_22_837Z-debug-0.log
+npm http cache https://registry.npmjs.org/axios 36ms (cache hit)
+npm http cache https://registry.npmjs.org/framer-motion 50ms (cache hit)
+npm http cache https://registry.npmjs.org/@emotion%2fis-prop-valid 14ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/react 56ms (cache hit)
+npm http cache https://registry.npmjs.org/react-dom 46ms (cache hit)
+npm http cache https://registry.npmjs.org/react-icons 10ms (cache hit)
+npm http cache https://registry.npmjs.org/react-router-dom 16ms (cache hit)
+npm http cache https://registry.npmjs.org/recharts 10ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2freact 15ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2freact-dom 15ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2freact-router-dom 11ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@vitejs%2fplugin-react 15ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/vite 172ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2fnode 78ms (cache hit)
+npm http cache https://registry.npmjs.org/less 19ms (cache hit)
+npm http cache https://registry.npmjs.org/lightningcss 15ms (cache hit)
+npm http cache https://registry.npmjs.org/sass 16ms (cache hit)
+npm http cache https://registry.npmjs.org/sass-embedded 10ms (cache hit)
+npm http cache https://registry.npmjs.org/stylus 13ms (cache hit)
+npm http cache https://registry.npmjs.org/sugarss 11ms (cache hit)
+npm http cache https://registry.npmjs.org/postcss 12ms (cache hit)
+npm http cache https://registry.npmjs.org/terser 11ms (cache hit)
+npm http cache https://registry.npmjs.org/autoprefixer 18ms (cache hit)
+npm http cache https://registry.npmjs.org/tailwindcss 65ms (cache hit)
+npm http cache https://registry.npmjs.org/typescript 49ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2fprop-types 36ms (cache hit)
+npm http cache https://registry.npmjs.org/csstype 38ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2freact-router 43ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@rolldown%2fpluginutils 47ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/esbuild 52ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fcore 66ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2fbabel__core 76ms (cache hit)
+npm http cache https://registry.npmjs.org/react-refresh 94ms (cache hit)
+npm http cache 
+https://registry.npmjs.org/@babel%2fplugin-transform-react-jsx-self 143ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/picocolors 148ms (cache hit)
+npm http cache 
+https://registry.npmjs.org/@babel%2fplugin-transform-react-jsx-source 151ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/rollup 178ms (cache hit)
+npm http cache https://registry.npmjs.org/fraction.js 273ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2fhistory 285ms (cache hit)
+npm http cache https://registry.npmjs.org/fsevents 287ms (cache hit)
+npm http cache https://registry.npmjs.org/postcss-value-parser 288ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/picocolors 273ms (cache hit)
+npm http cache https://registry.npmjs.org/nanoid 291ms (cache hit)
+npm http cache https://registry.npmjs.org/browserslist 312ms (cache hit)
+npm http cache https://registry.npmjs.org/source-map-js 278ms (cache hit)
+npm http cache https://registry.npmjs.org/caniuse-lite 321ms (cache hit)
+npm http cache https://registry.npmjs.org/follow-redirects 229ms (cache hit)
+npm http cache https://registry.npmjs.org/form-data 304ms (cache hit)
+npm http cache https://registry.npmjs.org/proxy-from-env 245ms (cache hit)
+npm http cache https://registry.npmjs.org/tslib 233ms (cache hit)
+npm http cache https://registry.npmjs.org/https-proxy-agent 239ms (cache hit)
+npm http cache https://registry.npmjs.org/motion-utils 110ms (cache hit)
+npm http cache https://registry.npmjs.org/motion-dom 118ms (cache hit)
+npm http cache https://registry.npmjs.org/loose-envify 112ms (cache hit)
+npm http cache https://registry.npmjs.org/scheduler 120ms (cache hit)
+npm http cache https://registry.npmjs.org/clsx 130ms (cache hit)
+npm http cache https://registry.npmjs.org/loose-envify 148ms (cache hit)
+npm http cache https://registry.npmjs.org/react-router 156ms (cache hit)
+npm http cache https://registry.npmjs.org/@remix-run%2frouter 180ms (cache hit)
+npm http cache https://registry.npmjs.org/react-smooth 151ms (cache hit)
+npm http cache https://registry.npmjs.org/react-is 171ms (cache hit)
+npm http cache https://registry.npmjs.org/recharts-scale 216ms (cache hit)
+npm http cache https://registry.npmjs.org/lodash 252ms (cache hit)
+npm http cache https://registry.npmjs.org/tiny-invariant 222ms (cache hit)
+npm http cache https://registry.npmjs.org/dlv 216ms (cache hit)
+npm http cache https://registry.npmjs.org/victory-vendor 225ms (cache hit)
+npm http cache https://registry.npmjs.org/eventemitter3 237ms (cache hit)
+npm http cache https://registry.npmjs.org/arg 230ms (cache hit)
+npm http cache https://registry.npmjs.org/jiti 228ms (cache hit)
+npm http cache https://registry.npmjs.org/is-glob 176ms (cache hit)
+npm http cache https://registry.npmjs.org/resolve 172ms (cache hit)
+npm http cache https://registry.npmjs.org/sucrase 176ms (cache hit)
+npm http cache https://registry.npmjs.org/chokidar 148ms (cache hit)
+npm http cache https://registry.npmjs.org/fast-glob 148ms (cache hit)
+npm http cache https://registry.npmjs.org/didyoumean 82ms (cache hit)
+npm http cache https://registry.npmjs.org/lilconfig 150ms (cache hit)
+npm http cache https://registry.npmjs.org/micromatch 90ms (cache hit)
+npm http cache https://registry.npmjs.org/postcss-js 97ms (cache hit)
+npm http cache https://registry.npmjs.org/object-hash 97ms (cache hit)
+npm http cache https://registry.npmjs.org/normalize-path 93ms (cache hit)
+npm http cache https://registry.npmjs.org/glob-parent 100ms (cache hit)
+npm http cache https://registry.npmjs.org/postcss-import 93ms (cache hit)
+npm http cache https://registry.npmjs.org/@alloc%2fquick-lru 85ms (cache hit)
+npm http cache https://registry.npmjs.org/postcss-nested 93ms (cache hit)
+npm http cache https://registry.npmjs.org/postcss-load-config 85ms (cache hit)
+npm http cache https://registry.npmjs.org/postcss-selector-parser 70ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/gensync 30ms (cache hit)
+npm http cache https://registry.npmjs.org/json5 33ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2ftemplate 35ms (cache hit)
+npm http cache https://registry.npmjs.org/semver 40ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fhelpers 45ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2ftraverse 49ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2ftypes 56ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fparser 63ms (cache hit)
+npm http cache https://registry.npmjs.org/@jridgewell%2fremapping 70ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/debug 73ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fgenerator 79ms (cache hit)
+npm http cache https://registry.npmjs.org/convert-source-map 84ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fcode-frame 86ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fhelper-module-transforms 
+88ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fhelper-compilation-targets 
+93ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fhelper-plugin-utils 74ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@babel%2ftypes 75ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fparser 76ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2fbabel__traverse 74ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@types%2fbabel__generator 72ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@types%2fbabel__template 86ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@babel%2fhelper-plugin-utils 104ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/jsesc 31ms (cache hit)
+npm http cache https://registry.npmjs.org/js-tokens 36ms (cache hit)
+npm http cache https://registry.npmjs.org/@jridgewell%2fgen-mapping 36ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fcompat-data 37ms (cache hit)
+npm http cache https://registry.npmjs.org/@jridgewell%2ftrace-mapping 41ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fhelper-globals 38ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@babel%2fhelper-validator-identifier 
+46ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fhelper-module-imports 44ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fhelper-validator-identifier 
+46ms (cache hit)
+npm http cache https://registry.npmjs.org/lru-cache 52ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fhelper-string-parser 56ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fhelper-validator-option 
+62ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fhelper-validator-identifier 
+62ms (cache hit)
+npm http cache https://registry.npmjs.org/@jridgewell%2fgen-mapping 64ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@jridgewell%2ftrace-mapping 67ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/ms 47ms (cache hit)
+npm http cache https://registry.npmjs.org/@jridgewell%2fsourcemap-codec 9ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@jridgewell%2fresolve-uri 11ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@jridgewell%2fsourcemap-codec 11ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/baseline-browser-mapping 11ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/update-browserslist-db 16ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/electron-to-chromium 28ms (cache hit)
+npm http cache https://registry.npmjs.org/yallist 61ms (cache hit)
+npm http cache https://registry.npmjs.org/node-releases 65ms (cache hit)
+npm http cache https://registry.npmjs.org/hasown 16ms (cache hit)
+npm http cache https://registry.npmjs.org/combined-stream 16ms (cache hit)
+npm http cache https://registry.npmjs.org/es-set-tostringtag 17ms (cache hit)
+npm http cache https://registry.npmjs.org/agent-base 18ms (cache hit)
+npm http cache https://registry.npmjs.org/asynckit 21ms (cache hit)
+npm http cache https://registry.npmjs.org/mime-types 22ms (cache hit)
+npm http cache https://registry.npmjs.org/escalade 7ms (cache hit)
+npm http cache https://registry.npmjs.org/get-intrinsic 17ms (cache hit)
+npm http cache https://registry.npmjs.org/function-bind 15ms (cache hit)
+npm http cache https://registry.npmjs.org/es-errors 22ms (cache hit)
+npm http cache https://registry.npmjs.org/delayed-stream 25ms (cache hit)
+npm http cache https://registry.npmjs.org/mime-db 22ms (cache hit)
+npm http cache https://registry.npmjs.org/has-tostringtag 27ms (cache hit)
+npm http cache https://registry.npmjs.org/has-symbols 21ms (cache hit)
+npm http cache https://registry.npmjs.org/es-object-atoms 21ms (cache hit)
+npm http cache https://registry.npmjs.org/gopd 24ms (cache hit)
+npm http cache https://registry.npmjs.org/math-intrinsics 22ms (cache hit)
+npm http cache https://registry.npmjs.org/has-symbols 22ms (cache hit)
+npm http cache https://registry.npmjs.org/es-define-property 24ms (cache hit)
+npm http cache https://registry.npmjs.org/get-proto 29ms (cache hit)
+npm http cache https://registry.npmjs.org/call-bind-apply-helpers 25ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/dunder-proto 16ms (cache hit)
+npm http cache https://registry.npmjs.org/react 48ms (cache hit)
+npm http cache https://registry.npmjs.org/react 54ms (cache hit)
+npm http cache https://registry.npmjs.org/react-dom 58ms (cache hit)
+npm http cache https://registry.npmjs.org/d3-array 30ms (cache hit)
+npm http cache https://registry.npmjs.org/d3-scale 35ms (cache hit)
+npm http cache https://registry.npmjs.org/decimal.js-light 42ms (cache hit)
+npm http cache https://registry.npmjs.org/fast-equals 46ms (cache hit)
+npm http cache https://registry.npmjs.org/d3-shape 48ms (cache hit)
+npm http cache https://registry.npmjs.org/d3-ease 54ms (cache hit)
+npm http cache https://registry.npmjs.org/react-transition-group 56ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/d3-timer 57ms (cache hit)
+npm http cache https://registry.npmjs.org/d3-time 60ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2fd3-ease 62ms (cache hit)
+npm http cache https://registry.npmjs.org/prop-types 65ms (cache hit)
+npm http cache https://registry.npmjs.org/d3-interpolate 65ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2fd3-scale 68ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2fd3-time 71ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2fd3-array 74ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2fd3-timer 41ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2fd3-shape 50ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2fd3-interpolate 41ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/react 32ms (cache hit)
+npm http cache https://registry.npmjs.org/react-dom 32ms (cache hit)
+npm http cache https://registry.npmjs.org/dom-helpers 11ms (cache hit)
+npm http cache https://registry.npmjs.org/object-assign 14ms (cache hit)
+npm http cache https://registry.npmjs.org/@babel%2fruntime 25ms (cache hit)
+npm http cache https://registry.npmjs.org/react-is 62ms (cache hit)
+npm http cache https://registry.npmjs.org/tsx 9ms (cache hit)
+npm http cache https://registry.npmjs.org/yaml 9ms (cache hit)
+npm http cache https://registry.npmjs.org/@nodelib%2ffs.stat 42ms (cache hit)
+npm http cache https://registry.npmjs.org/merge2 49ms (cache hit)
+npm http cache https://registry.npmjs.org/braces 58ms (cache hit)
+npm http cache https://registry.npmjs.org/readdirp 58ms (cache hit)
+npm http cache https://registry.npmjs.org/is-binary-path 60ms (cache hit)
+npm http cache https://registry.npmjs.org/@nodelib%2ffs.walk 60ms (cache hit)
+npm http cache https://registry.npmjs.org/anymatch 70ms (cache hit)
+npm http cache https://registry.npmjs.org/is-extglob 69ms (cache hit)
+npm http cache https://registry.npmjs.org/camelcase-css 66ms (cache hit)
+npm http cache https://registry.npmjs.org/braces 70ms (cache hit)
+npm http cache https://registry.npmjs.org/read-cache 70ms (cache hit)
+npm http cache https://registry.npmjs.org/cssesc 69ms (cache hit)
+npm http cache https://registry.npmjs.org/picomatch 73ms (cache hit)
+npm http cache https://registry.npmjs.org/util-deprecate 77ms (cache hit)
+npm http cache https://registry.npmjs.org/path-parse 78ms (cache hit)
+npm http cache https://registry.npmjs.org/mz 59ms (cache hit)
+npm http cache https://registry.npmjs.org/tinyglobby 53ms (cache hit)
+npm http cache https://registry.npmjs.org/lines-and-columns 65ms (cache hit)
+npm http cache https://registry.npmjs.org/is-core-module 80ms (cache hit)
+npm http cache https://registry.npmjs.org/supports-preserve-symlinks-flag 75ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/commander 73ms (cache hit)
+npm http cache https://registry.npmjs.org/pirates 72ms (cache hit)
+npm http cache https://registry.npmjs.org/ts-interface-checker 65ms (cache hit)
+npm http cache https://registry.npmjs.org/binary-extensions 10ms (cache hit)
+npm http cache https://registry.npmjs.org/fill-range 12ms (cache hit)
+npm http cache https://registry.npmjs.org/to-regex-range 10ms (cache hit)
+npm http cache https://registry.npmjs.org/@nodelib%2ffs.scandir 10ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/fastq 14ms (cache hit)
+npm http cache https://registry.npmjs.org/reusify 12ms (cache hit)
+npm http cache https://registry.npmjs.org/run-parallel 15ms (cache hit)
+npm http cache https://registry.npmjs.org/queue-microtask 8ms (cache hit)
+npm http cache https://registry.npmjs.org/is-number 9ms (cache hit)
+npm http cache https://registry.npmjs.org/pify 12ms (cache hit)
+npm http cache https://registry.npmjs.org/any-promise 8ms (cache hit)
+npm http cache https://registry.npmjs.org/thenify-all 10ms (cache hit)
+npm http cache https://registry.npmjs.org/fdir 11ms (cache hit)
+npm http cache https://registry.npmjs.org/thenify 8ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2fd3-color 19ms (cache hit)
+npm http cache https://registry.npmjs.org/@types%2fd3-path 20ms (cache hit)
+npm http cache https://registry.npmjs.org/d3-color 22ms (cache hit)
+npm http cache https://registry.npmjs.org/internmap 25ms (cache hit)
+npm http cache https://registry.npmjs.org/d3-time-format 25ms (cache hit)
+npm http cache https://registry.npmjs.org/d3-format 30ms (cache hit)
+npm http cache https://registry.npmjs.org/d3-path 33ms (cache hit)
+npm http cache https://registry.npmjs.org/@esbuild%2flinux-x64 44ms (cache hit)
+npm http cache https://registry.npmjs.org/@esbuild%2fwin32-x64 46ms (cache hit)
+npm http cache https://registry.npmjs.org/@esbuild%2faix-ppc64 51ms (cache hit)
+npm http cache https://registry.npmjs.org/@esbuild%2fdarwin-x64 49ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2flinux-arm 57ms (cache hit)
+npm http cache https://registry.npmjs.org/@esbuild%2fsunos-x64 58ms (cache hit)
+npm http cache https://registry.npmjs.org/@esbuild%2flinux-ia32 58ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2fandroid-x64 58ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2fwin32-ia32 64ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2fandroid-arm 66ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2fnetbsd-x64 71ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2flinux-ppc64 70ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2flinux-s390x 73ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2flinux-arm64 77ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2ffreebsd-x64 81ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2fopenbsd-x64 60ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2fdarwin-arm64 61ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2ffreebsd-arm64 58ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2fwin32-arm64 69ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2fandroid-arm64 67ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@esbuild%2flinux-mips64el 59ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@esbuild%2flinux-loong64 69ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@types%2festree 63ms (cache hit)
+npm http cache https://registry.npmjs.org/@esbuild%2flinux-riscv64 78ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-android-arm64 69ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-darwin-arm64 78ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-freebsd-arm64 72ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-linux-arm64-gnu 
+74ms (cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-win32-arm64-msvc 
+85ms (cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-linux-arm64-musl 
+83ms (cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-win32-ia32-msvc 
+86ms (cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-android-arm-eabi 
+104ms (cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-linux-arm-gnueabihf 
+105ms (cache hit)
+npm http cache 
+https://registry.npmjs.org/@rollup%2frollup-linux-arm-musleabihf 106ms (cache 
+hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-linux-loong64-gnu 
+105ms (cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-linux-loong64-musl 
+102ms (cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-linux-riscv64-musl 
+98ms (cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-linux-ppc64-gnu 
+94ms (cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-linux-riscv64-gnu 
+109ms (cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-linux-ppc64-musl 
+96ms (cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-linux-s390x-gnu 
+94ms (cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-darwin-x64 94ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-win32-x64-gnu 91ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-win32-x64-msvc 89ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-freebsd-x64 85ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-openbsd-x64 48ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-linux-x64-musl 57ms 
+(cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-openharmony-arm64 
+52ms (cache hit)
+npm http cache https://registry.npmjs.org/@rollup%2frollup-linux-x64-gnu 70ms 
+(cache hit)
+npm verbose type range
+npm verbose stack react-icons: No matching version found for 
+react-icons@^5.14.0.
+npm verbose stack     at module.exports (C:\Users\MEET\AppData\Roaming\npm\node
+_modules\npm\node_modules\npm-pick-manifest\lib\index.js:210:23)
+npm verbose stack     at RegistryFetcher.manifest (C:\Users\MEET\AppData\Roamin
+g\npm\node_modules\npm\node_modules\pacote\lib\registry.js:130:54)
+npm verbose stack     at async #fetchManifest (C:\Users\MEET\AppData\Roaming\np
+m\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.
+js:1227:20)
+npm verbose stack     at async #nodeFromEdge (C:\Users\MEET\AppData\Roaming\npm
+\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.j
+s:1061:19)
+npm verbose stack     at async #buildDepStep (C:\Users\MEET\AppData\Roaming\npm
+\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-ideal-tree.j
+s:917:11)
+npm verbose stack     at async Arborist.buildIdealTree (C:\Users\MEET\AppData\R
+oaming\npm\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\build-id
+eal-tree.js:170:7)
+npm verbose stack     at async Promise.all (index 1)
+npm verbose stack     at async Arborist.reify (C:\Users\MEET\AppData\Roaming\np
+m\node_modules\npm\node_modules\@npmcli\arborist\lib\arborist\reify.js:111:5)
+npm verbose stack     at async Install.exec (C:\Users\MEET\AppData\Roaming\npm\
+node_modules\npm\lib\commands\install.js:146:5)
+npm verbose stack     at async Npm.exec 
+(C:\Users\MEET\AppData\Roaming\npm\node_modules\npm\lib\npm.js:193:9)
+npm error code ETARGET
+npm error notarget No matching version found for react-icons@^5.14.0.
+npm error notarget In most cases you or one of your dependencies are 
+requesting a package version that doesn't exist.
+npm verbose cwd 
+D:\Users\Downloads\TIME_PASS\Tomato_Disease_Classification\frontend
+npm verbose os Windows_NT 10.0.26200
+npm verbose node v22.19.0
+npm verbose npm  v11.12.1
+npm verbose exit 1
+npm verbose code 1
+npm error A complete log of this run can be found in: C:\Users\MEET\AppData\Loc
+al\npm-cache\_logs\2026-07-03T09_48_22_837Z-debug-0.log
