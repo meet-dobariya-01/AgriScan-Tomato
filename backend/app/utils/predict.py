@@ -11,6 +11,7 @@ os.environ["TF_CPP_MIN_VLOG_LEVEL"] = "3"
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
+from tensorflow.keras.mixed_precision import Policy as MixedPrecisionPolicy
 from typing import Dict, List, Tuple
 import time
 import logging
@@ -30,6 +31,7 @@ class CompatibleInputLayer(InputLayer):
 class DTypePolicy:
     def __init__(self, name='float32'):
         self.name = name
+        self.dtype = tf.dtypes.as_dtype(name)
 
     def get_config(self):
         return {'name': self.name}
@@ -38,8 +40,27 @@ class DTypePolicy:
     def from_config(cls, config):
         return cls(**config)
 
+    def compute_dtype(self, *args, **kwargs):
+        return self.dtype
+
+    def variable_dtype(self, *args, **kwargs):
+        return self.dtype
+
+    @property
+    def loss_scale(self):
+        return None
+
+    def __repr__(self):
+        return f"DTypePolicy(name={self.name!r})"
+
 keras.utils.get_custom_objects()['InputLayer'] = CompatibleInputLayer
 keras.utils.get_custom_objects()['DTypePolicy'] = DTypePolicy
+try:
+    import keras as standalone_keras
+    standalone_keras.utils.get_custom_objects()['InputLayer'] = CompatibleInputLayer
+    standalone_keras.utils.get_custom_objects()['DTypePolicy'] = DTypePolicy
+except ImportError:
+    pass
 
 logger = logging.getLogger(__name__)
 
@@ -86,6 +107,7 @@ class TomatoDiseasePredictor:
                 compile=False,
                 custom_objects={
                     'InputLayer': CompatibleInputLayer,
+                    'DTypePolicy': DTypePolicy,
                 }
             )
             # Recompile with basic settings
@@ -95,9 +117,9 @@ class TomatoDiseasePredictor:
                 metrics=['accuracy']
             )
             return True
-        except Exception as e:
-            logger.error("Error loading model: %s", str(e))
-            return False
+        except Exception:
+            logger.exception("Error loading model")
+            raise
     
     def predict(self, image_array: np.ndarray) -> Dict:
         """
