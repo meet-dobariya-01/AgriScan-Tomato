@@ -8,76 +8,11 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
 os.environ["TF_CPP_MIN_VLOG_LEVEL"] = "3"
 
-import sys
 import numpy as np
-import tensorflow as tf
 from tensorflow import keras
-from tensorflow.keras.mixed_precision import Policy as MixedPrecisionPolicy
-from typing import Dict, List, Tuple
+from typing import Dict, List
 import time
 import logging
-
-# Monkey-patch InputLayer for Keras 3 -> Keras 2 backward compatibility
-from tensorflow.keras.layers import InputLayer, Rescaling
-from tensorflow.keras.utils import register_keras_serializable
-
-class CompatibleInputLayer(InputLayer):
-    def __init__(self, **kwargs):
-        if 'batch_shape' in kwargs:
-            kwargs['batch_input_shape'] = kwargs.pop('batch_shape')
-        kwargs.pop('optional', None)
-        super().__init__(**kwargs)
-
-@register_keras_serializable(package='custom')
-class DTypePolicy:
-    def __init__(self, name='float32'):
-        self.name = name
-        self.dtype = tf.dtypes.as_dtype(name)
-
-    def get_config(self):
-        return {'name': self.name}
-
-    @classmethod
-    def from_config(cls, config):
-        return cls(**config)
-
-    @property
-    def compute_dtype(self):
-        return self.dtype
-
-    @property
-    def variable_dtype(self):
-        return self.dtype
-
-    @property
-    def loss_scale(self):
-        return None
-
-    def __repr__(self):
-        return f"DTypePolicy(name={self.name!r})"
-
-keras.utils.get_custom_objects()['InputLayer'] = CompatibleInputLayer
-keras.utils.get_custom_objects()['DTypePolicy'] = DTypePolicy
-keras.utils.get_custom_objects()['Rescaling'] = Rescaling
-try:
-    import keras as standalone_keras
-    standalone_keras.utils.get_custom_objects()['InputLayer'] = CompatibleInputLayer
-    standalone_keras.utils.get_custom_objects()['DTypePolicy'] = DTypePolicy
-    standalone_keras.utils.get_custom_objects()['Rescaling'] = Rescaling
-    standalone_keras.DTypePolicy = DTypePolicy
-    standalone_keras.InputLayer = CompatibleInputLayer
-    standalone_keras.Rescaling = Rescaling
-except ImportError:
-    pass
-
-# Also register with the top-level keras module if imported separately.
-if 'keras' in sys.modules:
-    try:
-        import keras as top_level_keras
-        top_level_keras.utils.get_custom_objects()['InputLayer'] = CompatibleInputLayer
-        top_level_keras.utils.get_custom_objects()['DTypePolicy'] = DTypePolicy
-    except Exception:
-        pass
 
 logger = logging.getLogger(__name__)
 
@@ -121,11 +56,7 @@ class TomatoDiseasePredictor:
             # Try loading without recompiling first (handles cross-version compatibility)
             self.model = keras.models.load_model(
                 self.model_path,
-                compile=False,
-                custom_objects={
-                    'InputLayer': CompatibleInputLayer,
-                    'DTypePolicy': DTypePolicy,
-                }
+                compile=False
             )
             # Recompile with basic settings
             self.model.compile(
