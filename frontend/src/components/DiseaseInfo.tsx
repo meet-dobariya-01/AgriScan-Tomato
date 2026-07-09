@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { AlertCircle, Bug, ShieldCheck, Stethoscope } from "lucide-react";
 import axios from "axios";
 
-const API_BASE = ((import.meta as any).env?.VITE_API_BASE as string) || "http://127.0.0.1:8000/api/v1";
+const API_BASE = ((import.meta as any).env?.VITE_API_BASE as string) || "/api/v1";
 
 interface DiseaseData {
   name: string; scientific_name: string; description: string;
@@ -39,9 +39,13 @@ export const DiseaseInfo: React.FC<{ diseaseName: string }> = ({ diseaseName }) 
   useEffect(() => {
     if (!diseaseName) return;
     setLoading(true); setError(null);
-    axios.get(`${API_BASE}/disease/${diseaseName}`)
+    const nameForApi = encodeURIComponent(diseaseName.replace(/\s+/g, "_"));
+    axios.get(`${API_BASE}/disease/${nameForApi}`)
       .then(r => setData(r.data))
-      .catch(e => setError(e?.response?.data?.detail || "Disease info unavailable"))
+      .catch(e => {
+        const detail = e?.response?.data?.detail || e?.message || "Disease info unavailable";
+        setError(detail);
+      })
       .finally(() => setLoading(false));
   }, [diseaseName]);
 

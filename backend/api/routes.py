@@ -63,7 +63,10 @@ async def gradcam_image(request: Request, file: UploadFile = File(...)) -> GradC
 @router.get("/disease/{name}", response_model=DiseaseInfoResponse)
 async def get_disease_details(request: Request, name: str) -> DiseaseInfoResponse:
     service = request.app.state.inference_service
-    disease_info = await run_in_threadpool(service.get_disease_info, name)
+    # Normalize common frontend name variants before lookup: convert spaces and
+    # hyphens to underscores which are used in our canonical keys.
+    normalized_name = name.replace(" ", "_").replace("-", "_")
+    disease_info = await run_in_threadpool(service.get_disease_info, normalized_name)
 
     if disease_info is None:
         raise HTTPException(status_code=HTTP_404_NOT_FOUND, detail=f"Disease information not found for '{name}'.")

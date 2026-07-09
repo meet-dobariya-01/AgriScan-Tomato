@@ -79,8 +79,46 @@ class InferenceService:
         }
 
     def get_disease_info(self, disease_name: str) -> Optional[Dict[str, Any]]:
-        normalized_name = disease_name.strip()
-        return DISEASE_INFO.get(normalized_name)
+        # Robust lookup: accept frontend variants (spaces, underscores, hyphens,
+        # different casing, and minor punctuation) and attempt multiple
+        # normalization strategies before returning None.
+        name = (disease_name or "").strip()
+        if not name:
+            return None
+
+        # Direct match
+        if name in DISEASE_INFO:
+            return DISEASE_INFO[name]
+
+        # Try common simple transforms
+        candidates = [
+            name,
+            name.replace(" ", "_"),
+            name.replace("-", "_"),
+            name.replace(" ", "_").replace("-", "_"),
+        ]
+        for cand in candidates:
+            if cand in DISEASE_INFO:
+                return DISEASE_INFO[cand]
+
+        # Case-insensitive match and underscore/space equivalence
+        lower = name.lower()
+        for key in DISEASE_INFO.keys():
+            if key.lower() == lower:
+                return DISEASE_INFO[key]
+            if key.lower().replace("_", " ") == lower:
+                return DISEASE_INFO[key]
+
+        # Alphanumeric normalization (remove non-alnum characters) and compare
+        def _norm(s: str) -> str:
+            return "".join(ch.lower() for ch in s if ch.isalnum())
+
+        n_norm = _norm(name)
+        for key in DISEASE_INFO.keys():
+            if _norm(key) == n_norm:
+                return DISEASE_INFO[key]
+
+        return None
 
     def get_model_metadata(self) -> Dict[str, Any]:
         model_info = self.predictor.get_model_info()

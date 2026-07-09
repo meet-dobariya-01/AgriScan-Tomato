@@ -13,13 +13,11 @@ def _get_preprocess_input():
     try:
         from tensorflow.keras.applications.efficientnet import preprocess_input
         return preprocess_input
-    except Exception:
-        # fallback: try keras top-level if available
-        try:
-            from keras.applications.efficientnet import preprocess_input
-            return preprocess_input
-        except Exception:
-            raise
+    except Exception as e:
+        raise RuntimeError(
+            "Failed to import EfficientNet `preprocess_input` from `tensorflow.keras`. "
+            "Ensure `tensorflow` is installed and the runtime matches the model (use `tensorflow==2.21.0` or compatible)."
+        ) from e
 
 
 def load_and_preprocess_image(

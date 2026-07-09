@@ -10,7 +10,7 @@ import { DiseaseInfo } from "../components/DiseaseInfo";
 import { Loader } from "../components/Loader";
 import { ErrorMessage } from "../components/ErrorMessage";
 
-const API_BASE = ((import.meta as any).env?.VITE_API_BASE as string) || "http://127.0.0.1:8000/api/v1";
+const API_BASE = ((import.meta as any).env?.VITE_API_BASE as string) || "/api/v1";
 
 interface GradCAMResponse {
   predicted_disease: string; confidence: number; confidence_percentage: number;
@@ -204,7 +204,8 @@ const Home: React.FC<HomeProps> = ({ addEntry }) => {
               <span className="text-xs font-semibold text-[#9CA3AF] uppercase tracking-widest px-2">Disease Intelligence</span>
               <div className="h-px flex-1 bg-[#E5E7EB]" />
             </div>
-            <DiseaseInfo diseaseName={result.predicted_disease} />
+            {/* Normalize predicted disease (spaces/hyphens -> underscores) before passing */}
+            <DiseaseInfo diseaseName={result.predicted_disease.replace(/\s+/g, "_").replace(/-+/g, "_")} />
           </motion.div>
         )}
       </AnimatePresence>
