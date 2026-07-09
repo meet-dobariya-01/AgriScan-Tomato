@@ -8,6 +8,7 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
 os.environ["TF_CPP_MIN_VLOG_LEVEL"] = "3"
 
+import sys
 import numpy as np
 import tensorflow as tf
 from tensorflow import keras
@@ -17,7 +18,7 @@ import time
 import logging
 
 # Monkey-patch InputLayer for Keras 3 -> Keras 2 backward compatibility
-from tensorflow.keras.layers import InputLayer
+from tensorflow.keras.layers import InputLayer, Rescaling
 from tensorflow.keras.utils import register_keras_serializable
 
 class CompatibleInputLayer(InputLayer):
@@ -28,10 +29,9 @@ class CompatibleInputLayer(InputLayer):
         super().__init__(**kwargs)
 
 @register_keras_serializable(package='custom')
-class DTypePolicy:
+class DTypePolicy(MixedPrecisionPolicy):
     def __init__(self, name='float32'):
-        self.name = name
-        self.dtype = tf.dtypes.as_dtype(name)
+        super().__init__(name)
 
     def get_config(self):
         return {'name': self.name}
@@ -41,10 +41,10 @@ class DTypePolicy:
         return cls(**config)
 
     def compute_dtype(self, *args, **kwargs):
-        return self.dtype
+        return self._dtype
 
     def variable_dtype(self, *args, **kwargs):
-        return self.dtype
+        return self._dtype
 
     @property
     def loss_scale(self):
@@ -55,12 +55,26 @@ class DTypePolicy:
 
 keras.utils.get_custom_objects()['InputLayer'] = CompatibleInputLayer
 keras.utils.get_custom_objects()['DTypePolicy'] = DTypePolicy
+keras.utils.get_custom_objects()['Rescaling'] = Rescaling
 try:
     import keras as standalone_keras
     standalone_keras.utils.get_custom_objects()['InputLayer'] = CompatibleInputLayer
     standalone_keras.utils.get_custom_objects()['DTypePolicy'] = DTypePolicy
+    standalone_keras.utils.get_custom_objects()['Rescaling'] = Rescaling
+    standalone_keras.DTypePolicy = DTypePolicy
+    standalone_keras.InputLayer = CompatibleInputLayer
+    standalone_keras.Rescaling = Rescaling
 except ImportError:
     pass
+
+# Also register with the top-level keras module if imported separately.
+if 'keras' in sys.modules:
+    try:
+        import keras as top_level_keras
+        top_level_keras.utils.get_custom_objects()['InputLayer'] = CompatibleInputLayer
+        top_level_keras.utils.get_custom_objects()['DTypePolicy'] = DTypePolicy
+    except Exception:
+        pass
 
 logger = logging.getLogger(__name__)
 

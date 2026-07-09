@@ -1,0 +1,1 @@
+import tensorflow as tf\nfrom backend.app.utils.predict import DTypePolicy\np = DTypePolicy()\nprint(type(p))\nprint(p.get_config())\nprint(hasattr(p, " compute_dtype\))\nprint(hasattr(p, \variable_dtype\))\nprint(p.compute_dtype())\n
