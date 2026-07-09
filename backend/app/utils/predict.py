@@ -17,6 +17,8 @@ import logging
 
 # Monkey-patch InputLayer for Keras 3 -> Keras 2 backward compatibility
 from tensorflow.keras.layers import InputLayer
+from tensorflow.keras.utils import register_keras_serializable
+
 class CompatibleInputLayer(InputLayer):
     def __init__(self, **kwargs):
         if 'batch_shape' in kwargs:
@@ -24,7 +26,20 @@ class CompatibleInputLayer(InputLayer):
         kwargs.pop('optional', None)
         super().__init__(**kwargs)
 
+@register_keras_serializable(package='custom')
+class DTypePolicy:
+    def __init__(self, name='float32'):
+        self.name = name
+
+    def get_config(self):
+        return {'name': self.name}
+
+    @classmethod
+    def from_config(cls, config):
+        return cls(**config)
+
 keras.utils.get_custom_objects()['InputLayer'] = CompatibleInputLayer
+keras.utils.get_custom_objects()['DTypePolicy'] = DTypePolicy
 
 logger = logging.getLogger(__name__)
 
