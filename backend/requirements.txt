@@ -7,4 +7,4 @@ opencv-python-headless>=4.10.0.84
 pydantic>=2.8.0
 pydantic-settings>=2.0.0
 python-multipart>=0.0.6
-keras==3.14.0
+
