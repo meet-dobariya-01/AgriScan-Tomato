@@ -74,6 +74,14 @@ run_*.cmd
 write_test.py
 test_run.txt
 
+# Specific temp/version files created during debugging
+check_model_version.py
+check_tf_version.py
+convert_model.py
+model_version.txt
+tf_version.txt
+__pycache__/
+
 # Model artifacts (large): keep a local copy but do not commit by default
 backend/models/*.h5
 backend/models/*.keras
