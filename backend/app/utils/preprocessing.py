@@ -7,7 +7,19 @@ import numpy as np
 from PIL import Image
 from typing import Tuple
 import tensorflow as tf
-from tensorflow.keras.applications.efficientnet import preprocess_input
+
+
+def _get_preprocess_input():
+    try:
+        from tensorflow.keras.applications.efficientnet import preprocess_input
+        return preprocess_input
+    except Exception:
+        # fallback: try keras top-level if available
+        try:
+            from keras.applications.efficientnet import preprocess_input
+            return preprocess_input
+        except Exception:
+            raise
 
 
 def load_and_preprocess_image(
@@ -44,7 +56,8 @@ def load_and_preprocess_image(
         # Add batch dimension
         img_array = np.expand_dims(img_array, axis=0)
         
-        # Preprocess using EfficientNet preprocessing
+        # Preprocess using EfficientNet preprocessing (lazy import)
+        preprocess_input = _get_preprocess_input()
         img_array = preprocess_input(img_array)
         
         return img_array
