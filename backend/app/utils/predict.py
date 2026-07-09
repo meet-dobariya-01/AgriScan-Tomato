@@ -29,9 +29,10 @@ class CompatibleInputLayer(InputLayer):
         super().__init__(**kwargs)
 
 @register_keras_serializable(package='custom')
-class DTypePolicy(MixedPrecisionPolicy):
+class DTypePolicy:
     def __init__(self, name='float32'):
-        super().__init__(name)
+        self.name = name
+        self.dtype = tf.dtypes.as_dtype(name)
 
     def get_config(self):
         return {'name': self.name}
@@ -40,11 +41,13 @@ class DTypePolicy(MixedPrecisionPolicy):
     def from_config(cls, config):
         return cls(**config)
 
-    def compute_dtype(self, *args, **kwargs):
-        return self._dtype
+    @property
+    def compute_dtype(self):
+        return self.dtype
 
-    def variable_dtype(self, *args, **kwargs):
-        return self._dtype
+    @property
+    def variable_dtype(self):
+        return self.dtype
 
     @property
     def loss_scale(self):
