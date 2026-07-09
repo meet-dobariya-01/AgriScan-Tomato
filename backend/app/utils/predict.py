@@ -15,6 +15,17 @@ from typing import Dict, List, Tuple
 import time
 import logging
 
+# Monkey-patch InputLayer for Keras 3 -> Keras 2 backward compatibility
+from tensorflow.keras.layers import InputLayer
+class CompatibleInputLayer(InputLayer):
+    def __init__(self, **kwargs):
+        if 'batch_shape' in kwargs:
+            kwargs['batch_input_shape'] = kwargs.pop('batch_shape')
+        kwargs.pop('optional', None)
+        super().__init__(**kwargs)
+
+keras.utils.get_custom_objects()['InputLayer'] = CompatibleInputLayer
+
 logger = logging.getLogger(__name__)
 
 
@@ -57,7 +68,10 @@ class TomatoDiseasePredictor:
             # Try loading without recompiling first (handles cross-version compatibility)
             self.model = keras.models.load_model(
                 self.model_path,
-                compile=False
+                compile=False,
+                custom_objects={
+                    'InputLayer': CompatibleInputLayer,
+                }
             )
             # Recompile with basic settings
             self.model.compile(
