@@ -62,3 +62,31 @@ sample_images/
 
 # Environment variables
 .env
+
+# Temporary validation / conversion scripts and outputs
+validate_*.py
+validate_*.txt
+inspect_*.py
+inspect_*.txt
+export_*.py
+tmp_*.py
+run_*.cmd
+write_test.py
+test_run.txt
+
+# Model artifacts (large): keep a local copy but do not commit by default
+backend/models/*.h5
+backend/models/*.keras
+*.h5
+*.keras
+
+# Python packaging/build
+.pytest_cache/
+pip-wheel-metadata/
+htmlcov/
+dist/
+build/
+
+# mypy / type checking
+.mypy_cache/
+
