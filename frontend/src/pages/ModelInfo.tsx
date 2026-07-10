@@ -1,11 +1,11 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { Brain, Layers, LayoutGrid, HardDrive, GitBranch, Zap, Server, FlaskConical, Cpu } from "lucide-react";
 import { Loader } from "../components/Loader";
 import { ErrorMessage } from "../components/ErrorMessage";
 
-const API_BASE = ((import.meta as any).env?.VITE_API_BASE as string) || "/api/v1";
+const API_BASE = ((import.meta as any).env?.VITE_API_BASE as string) || "https://tomato-disease-api.onrender.com/api/v1";
 interface ModelData { model_name: string; input_shape: number[]; num_classes: number; model_size_mb: number; total_params: number | null; }
 
 const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.07 } } };
