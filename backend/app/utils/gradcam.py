@@ -95,9 +95,22 @@ class GradCAM:
             
             # FIX: Add a tiny epsilon (1e-10) to prevent a division by zero error 
             heatmap /= (tf.reduce_max(heatmap) + 1e-10)
-            
-            return heatmap.numpy()
+            heatmap = heatmap.numpy()
 
+            del conv_outputs
+            del grads
+            del pooled_grads
+            del predictions
+            del class_channel
+            del base_output
+            del x
+
+            import gc
+            gc.collect()
+
+            return heatmap
+            
+            
         except Exception as e:
             print(f"Error generating heatmap: {str(e)}")
             return np.zeros((7, 7))

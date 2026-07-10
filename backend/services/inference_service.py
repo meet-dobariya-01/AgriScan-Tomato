@@ -2,7 +2,9 @@ import base64
 import io
 import os
 import time
+import gc
 from typing import Any, Dict, List, Optional
+# import tensorflow as tf
 
 import numpy as np
 from PIL import Image
@@ -53,6 +55,7 @@ class InferenceService:
         image_file = io.BytesIO(payload)
         preprocessed = load_and_preprocess_image(image_file)
         result = self.predictor.predict(preprocessed)
+        # tf.keras.backend.clear_session()
         top_predictions = self.predictor.get_top_n_predictions(preprocessed, top_n=3)
 
         return {
@@ -73,6 +76,22 @@ class InferenceService:
         top_predictions = self.predictor.get_top_n_predictions(preprocessed, top_n=3)
 
         heatmap_results = self.gradcam.generate_gradcam(preprocessed, original_image)
+        
+        original_base64 = self._image_to_base64(original_image)
+        heatmap_base64 = self._image_to_base64(
+            Image.fromarray(heatmap_results["heatmap"])
+        )
+        overlay_base64 = self._image_to_base64(
+            Image.fromarray(heatmap_results["superimposed"])
+        )
+
+        # Free memory
+        del preprocessed
+        del image_file
+        del original_image
+        del heatmap_results
+
+        gc.collect()
 
         return {
             "predicted_disease": result["predicted_class"],
@@ -80,10 +99,10 @@ class InferenceService:
             "confidence_percentage": result["confidence_percentage"],
             "top_predictions": top_predictions,
             "inference_time": result["inference_time"],
-            "original_image": self._image_to_base64(original_image),
-            "heatmap_image": self._image_to_base64(Image.fromarray(heatmap_results["heatmap"])),
-            "overlay_image": self._image_to_base64(Image.fromarray(heatmap_results["superimposed"])),
-        }
+        "original_image": original_base64,
+        "heatmap_image": heatmap_base64,
+        "overlay_image": overlay_base64,
+    }
 
     def get_disease_info(self, disease_name: str) -> Optional[Dict[str, Any]]:
         # Robust lookup: accept frontend variants (spaces, underscores, hyphens,

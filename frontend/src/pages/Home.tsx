@@ -56,7 +56,7 @@ const Home: React.FC<HomeProps> = ({ addEntry }) => {
       if (err.code === "ECONNABORTED") setError("Request timed out.");
       else if (err.response?.status === 400) setError(err.response.data.detail || "Invalid image");
       else if (err.response?.status === 500) setError("Server error. Please try again.");
-      else if (!err.response) setError("Cannot connect to backend on port 8000.");
+      else if (!err.response) setError("Backend is temporarily unavailable. Please try again.");
       else setError(err?.response?.data?.detail ?? "Prediction failed.");
     } finally { setLoading(false); }
   };
