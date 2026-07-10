@@ -21,20 +21,6 @@ class PredictResponse(BaseModel):
     inference_time: float
 
 
-class GradCAMImagePayload(BaseModel):
-    original_image: str
-    heatmap_image: str
-    overlay_image: str
-
-
-class GradCAMResponse(GradCAMImagePayload):
-    predicted_disease: str
-    confidence: float
-    confidence_percentage: float
-    top_predictions: List[PredictionItem]
-    inference_time: float
-
-
 class DiseaseInfoResponse(BaseModel):
     name: str
     scientific_name: str

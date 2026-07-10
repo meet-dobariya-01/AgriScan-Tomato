@@ -5,17 +5,16 @@ import { Scan, BrainCircuit, ScanLine, Sparkles, Leaf } from "lucide-react";
 import { ImageUpload } from "../components/ImageUpload";
 import { PredictionCard } from "../components/PredictionCard";
 import { Top3Predictions } from "../components/Top3Predictions";
-import { GradCAM } from "../components/GradCAM";
 import { DiseaseInfo } from "../components/DiseaseInfo";
 import { Loader } from "../components/Loader";
 import { ErrorMessage } from "../components/ErrorMessage";
 
 const API_BASE = ((import.meta as any).env?.VITE_API_BASE as string) || "https://tomato-disease-api.onrender.com/api/v1";
 
-interface GradCAMResponse {
+interface PredictResponse {
   predicted_disease: string; confidence: number; confidence_percentage: number;
   top_predictions: Array<{ disease: string; probability: number; percentage: number }>;
-  inference_time: number; original_image: string; heatmap_image: string; overlay_image: string;
+  inference_time: number;
 }
 
 const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.07 } } };
@@ -28,7 +27,7 @@ interface HomeProps {
 const Home: React.FC<HomeProps> = ({ addEntry }) => {
   const [file, setFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
-  const [result, setResult] = useState<GradCAMResponse | null>(null);
+  const [result, setResult] = useState<PredictResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -47,7 +46,7 @@ const Home: React.FC<HomeProps> = ({ addEntry }) => {
     setLoading(true); setResult(null); setError(null);
     const fd = new FormData(); fd.append("file", file);
     try {
-      const res = await axios.post<GradCAMResponse>(`${API_BASE}/gradcam`, fd, {
+      const res = await axios.post<PredictResponse>(`${API_BASE}/predict`, fd, {
         headers: { "Content-Type": "multipart/form-data" }, timeout: 300000,
       });
       setResult(res.data);
@@ -74,10 +73,10 @@ const Home: React.FC<HomeProps> = ({ addEntry }) => {
           <h1 className="text-xl font-bold text-[#111827]" style={{ fontFamily: "Poppins, sans-serif" }}>
             Tomato Leaf Disease Diagnosis
           </h1>
-          <p className="text-sm text-[#6B7280] mt-0.5">Upload a leaf image for instant classification with Grad-CAM explainability</p>
+          <p className="text-sm text-[#6B7280] mt-0.5">Upload a leaf image for instant classification</p>
         </div>
         <div className="hidden sm:flex items-center gap-5 shrink-0">
-          {[["11", "Diseases"], ["224×224", "Input"], ["Grad-CAM", "XAI"]].map(([v, l]) => (
+          {[["11", "Diseases"], ["224×224", "Input"]].map(([v, l]) => (
             <div key={l} className="text-center">
               <p className="text-base font-bold text-[#111827]">{v}</p>
               <p className="text-[10px] text-[#6B7280] font-medium">{l}</p>
@@ -186,14 +185,6 @@ const Home: React.FC<HomeProps> = ({ addEntry }) => {
         </motion.div>
       </div>
 
-      {/* Grad-CAM */}
-      <AnimatePresence>
-        {result && (
-          <motion.div key="gc" initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-            <GradCAM originalImage={result.original_image} heatmapImage={result.heatmap_image} overlayImage={result.overlay_image} />
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Disease Info */}
       <AnimatePresence>

@@ -36,7 +36,6 @@ const ModelInfo = () => {
 
   const endpoints = [
     { method: "POST", path: "/api/v1/predict",       desc: "Disease prediction",         mc: "badge-green" },
-    { method: "POST", path: "/api/v1/gradcam",        desc: "Grad-CAM visualization",    mc: "badge-green" },
     { method: "GET",  path: "/api/v1/disease/{name}", desc: "Disease info",              mc: "badge-blue" },
     { method: "GET",  path: "/api/v1/model",          desc: "Model metadata",            mc: "badge-blue" },
     { method: "GET",  path: "/api/v1/health",         desc: "Health check",              mc: "badge-blue" },
@@ -46,7 +45,6 @@ const ModelInfo = () => {
     { icon: Server,      label: "Backend",     value: "FastAPI + Uvicorn",   sub: "Port 8000",           color: "text-[#8B5CF6]", bg: "bg-[#F5F3FF]" },
     { icon: FlaskConical,label: "Frontend",    value: "React + Vite + TS",   sub: "Port 5173",           color: "text-[#0EA5E9]", bg: "bg-[#EFF6FF]" },
     { icon: Brain,       label: "Model",       value: "TensorFlow 2.x",      sub: "EfficientNet-B0",     color: "text-[#F97316]", bg: "bg-[#FFF7ED]" },
-    { icon: Zap,         label: "XAI",         value: "Grad-CAM",            sub: "Visual explainability", color: "text-[#16A34A]", bg: "bg-[#F0FDF4]" },
   ];
 
   return (
@@ -56,7 +54,7 @@ const ModelInfo = () => {
       <motion.div variants={fadeUp} className="card rounded-2xl px-6 py-5 border-l-4 border-l-[#8B5CF6]">
         <h2 className="text-2xl font-bold text-[#111827]" style={{ fontFamily: "Poppins, sans-serif" }}>Model Intelligence</h2>
         <p className="text-sm text-[#6B7280] leading-relaxed mt-1">
-          EfficientNet-B0 transfer learning on 11 tomato disease classes with frozen ImageNet backbone and Grad-CAM explainability.
+          EfficientNet-B0 transfer learning on 11 tomato disease classes with frozen ImageNet backbone.
         </p>
       </motion.div>
 

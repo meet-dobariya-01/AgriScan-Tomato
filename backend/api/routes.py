@@ -6,7 +6,6 @@ from typing import List
 from backend.schemas.responses import (
     HealthResponse,
     PredictResponse,
-    GradCAMResponse,
     DiseaseInfoResponse,
     ModelInfoResponse,
 )
@@ -42,22 +41,6 @@ async def predict_image(request: Request, file: UploadFile = File(...)) -> Predi
 
     prediction = await run_in_threadpool(service.predict_image, payload)
     return PredictResponse(**prediction)
-
-
-@router.post("/gradcam", response_model=GradCAMResponse)
-async def gradcam_image(request: Request, file: UploadFile = File(...)) -> GradCAMResponse:
-    if not _validate_image_type(file.filename, file.content_type or ""):
-        raise HTTPException(status_code=HTTP_400_BAD_REQUEST, detail="Unsupported file type. Use JPG or PNG images.")
-
-    payload = await file.read()
-    service = request.app.state.inference_service
-
-    is_valid = await run_in_threadpool(service.validate_image_bytes, payload)
-    if not is_valid:
-        raise HTTPException(status_code=HTTP_400_BAD_REQUEST, detail="Invalid image file or corrupted upload.")
-
-    gradcam_payload = await run_in_threadpool(service.generate_gradcam_response, payload)
-    return GradCAMResponse(**gradcam_payload)
 
 
 @router.get("/disease/{name}", response_model=DiseaseInfoResponse)

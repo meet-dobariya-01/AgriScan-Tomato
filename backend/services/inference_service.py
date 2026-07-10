@@ -12,7 +12,6 @@ from tensorflow import keras
 
 from backend.app.utils.preprocessing import load_and_preprocess_image, validate_image
 from backend.app.utils.predict import TomatoDiseasePredictor
-from backend.app.utils.gradcam import GradCAM
 from backend.app.utils.disease_info import DISEASE_INFO
 
 
@@ -23,7 +22,6 @@ class InferenceService:
         self.model_path = model_path
         self.predictor = TomatoDiseasePredictor(self.model_path)
         self.model = None
-        self.gradcam = None
         self._load_model()
 
     def _load_model(self) -> None:
@@ -40,9 +38,6 @@ class InferenceService:
 
         self.model = self.predictor.model
         print("===== STEP 4 =====")
-
-        self.gradcam = GradCAM(self.model)
-        print("===== STEP 5 =====")
 
     def validate_image_bytes(self, payload: bytes) -> bool:
         try:
@@ -64,38 +59,6 @@ class InferenceService:
             "confidence_percentage": result["confidence_percentage"],
             "top_predictions": top_predictions,
             "inference_time": result["inference_time"],
-        }
-
-    def generate_gradcam_response(self, payload: bytes) -> Dict[str, Any]:
-        image_file = io.BytesIO(payload)
-        original_image = Image.open(image_file).convert("RGB")
-        image_file.seek(0)
-
-        preprocessed = load_and_preprocess_image(image_file)
-        result = self.predictor.predict(preprocessed)
-        top_predictions = self.predictor.get_top_n_predictions(preprocessed, top_n=3)
-
-        heatmap_results = self.gradcam.generate_gradcam(preprocessed, original_image)
-        
-        overlay_base64 = self._image_to_base64(
-            Image.fromarray(heatmap_results["superimposed"])
-        )
-
-        # Free memory
-        del preprocessed
-        del image_file
-        del original_image
-        del heatmap_results
-
-        gc.collect()
-
-        return {
-            "predicted_disease": result["predicted_class"],
-            "confidence": result["confidence"],
-            "confidence_percentage": result["confidence_percentage"],
-            "top_predictions": top_predictions,
-            "inference_time": result["inference_time"],
-            "overlay_image": overlay_base64,
         }
 
     def get_disease_info(self, disease_name: str) -> Optional[Dict[str, Any]]:
