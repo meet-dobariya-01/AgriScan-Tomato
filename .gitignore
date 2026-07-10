@@ -98,3 +98,4 @@ build/
 # mypy / type checking
 .mypy_cache/
 
+node_modules/
