@@ -27,7 +27,7 @@ class TomatoDiseasePredictor:
         Initialize the predictor with model path
         
         Args:
-            model_path: Path to the trained model file (.h5)
+            model_path: Path to the trained model file  
         """
         self.model_path = model_path
         self.model = None
@@ -50,7 +50,7 @@ class TomatoDiseasePredictor:
         """Load the trained model"""
         import os
         if not os.path.exists(self.model_path):
-            print(f"❌ Model file not found at {self.model_path}")
+            print(f"Model file not found at {self.model_path}")
             return False
         try:
             # Try loading without recompiling first (handles cross-version compatibility)
@@ -58,12 +58,8 @@ class TomatoDiseasePredictor:
                 self.model_path,
                 compile=False
             )
-            # Recompile with basic settings
-            self.model.compile(
-                optimizer='adam',
-                loss='sparse_categorical_crossentropy',
-                metrics=['accuracy']
-            )
+            print("Model loaded successfully!")
+
             return True
         except Exception:
             logger.exception("Error loading model")

@@ -3,7 +3,7 @@ $backendPath = "D:\Users\Downloads\TIME_PASS\Tomato_Disease_Classification\backe
 $frontendPath = "D:\Users\Downloads\TIME_PASS\Tomato_Disease_Classification\frontend"
 
 Write-Host "Starting backend..."
-Start-Process pwsh -ArgumentList "-NoExit", "-Command", "Set-Location -Path '$backendPath'; python -m uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000"
+Start-Process pwsh -ArgumentList "-NoExit", "-Command", "Set-Location -Path 'D:\Users\Downloads\TIME_PASS\Tomato_Disease_Classification'; python -m uvicorn backend.main:app --reload --host 127.0.0.1 --port 8000"
 
 Write-Host "Starting frontend..."
 Start-Process pwsh -ArgumentList "-NoExit", "-Command", "Set-Location -Path '$frontendPath'; npm run dev -- --host 127.0.0.1 --port 5173"
