@@ -25,15 +25,22 @@ class InferenceService:
         self._load_model()
 
     def _load_model(self) -> None:
+        print("===== STEP 1 =====")
+
         if not os.path.exists(self.model_path):
             raise FileNotFoundError(f"Model file not found at '{self.model_path}'")
+        print("===== STEP 2 =====")
 
         self.predictor.load_model()
         if self.predictor.model is None:
             raise RuntimeError("Failed to load the Keras model.")
+        print("===== STEP 3 =====")
 
         self.model = self.predictor.model
+        print("===== STEP 4 =====")
+
         self.gradcam = GradCAM(self.model)
+        print("===== STEP 5 =====")
 
     def validate_image_bytes(self, payload: bytes) -> bool:
         try:

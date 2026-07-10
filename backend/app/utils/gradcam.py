@@ -20,16 +20,21 @@ class GradCAM:
         """
         Initialize Grad-CAM for Nested Sequential Models
         """
+        print("GradCAM STEP A")
         self.model = model
+        print("GradCAM STEP B")
         
         # 1. Target the base model directly
         self.base_model = self.model.layers[0]
+        print("GradCAM STEP C")
         
         # Fallback to known EfficientNetB0 last conv layer
         self.layer_name = "top_conv" 
+        print("GradCAM STEP D")
         
         # 2. Build the grad model strictly for the base model
         self.grad_model = self._build_grad_model()
+        print("GradCAM STEP E")
 
     def _build_grad_model(self):
         """Build gradient model targeting ONLY the base model"""

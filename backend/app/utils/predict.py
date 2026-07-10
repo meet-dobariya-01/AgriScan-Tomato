@@ -69,13 +69,13 @@ class TomatoDiseasePredictor:
         try:
             # Use custom_objects to handle 'renorm' keys that older Keras saved
             # but newer Keras versions (3.x on Render) no longer support.
-            custom_objects = {
-                "BatchNormalization": CompatibleBatchNormalization
-            }
+            # custom_objects = {
+            #     "BatchNormalization": CompatibleBatchNormalization
+            # }
             self.model = keras.models.load_model(
                 self.model_path,
-                compile=False,
-                custom_objects=custom_objects
+                compile=False
+                # custom_objects=custom_objects
             )
             print("Model loaded successfully!")
             return True
