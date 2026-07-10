@@ -9,10 +9,24 @@ os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
 os.environ["TF_CPP_MIN_VLOG_LEVEL"] = "3"
 
 import numpy as np
+import tensorflow as tf
 from tensorflow import keras
 from typing import Dict, List
 import time
 import logging
+
+
+class CompatibleBatchNormalization(keras.layers.BatchNormalization):
+    """
+    A drop-in replacement for BatchNormalization that silently ignores
+    the 'renorm', 'renorm_clipping', and 'renorm_momentum' kwargs that
+    older Keras versions saved into model configs but newer versions removed.
+    """
+    def __init__(self, *args, **kwargs):
+        kwargs.pop("renorm", None)
+        kwargs.pop("renorm_clipping", None)
+        kwargs.pop("renorm_momentum", None)
+        super().__init__(*args, **kwargs)
 
 logger = logging.getLogger(__name__)
 
@@ -53,13 +67,17 @@ class TomatoDiseasePredictor:
             print(f"Model file not found at {self.model_path}")
             return False
         try:
-            # Try loading without recompiling first (handles cross-version compatibility)
+            # Use custom_objects to handle 'renorm' keys that older Keras saved
+            # but newer Keras versions (3.x on Render) no longer support.
+            custom_objects = {
+                "BatchNormalization": CompatibleBatchNormalization
+            }
             self.model = keras.models.load_model(
                 self.model_path,
-                compile=False
+                compile=False,
+                custom_objects=custom_objects
             )
             print("Model loaded successfully!")
-
             return True
         except Exception:
             logger.exception("Error loading model")
