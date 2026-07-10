@@ -38,6 +38,16 @@ def create_app() -> FastAPI:
         }
     @app.on_event("startup")
     async def startup_event() -> None:
+    
+        import tensorflow as tf
+        import keras
+        import sys
+
+        print("Python:", sys.version)
+        print("TensorFlow:", tf.__version__)
+        print("Keras:", keras.__version__)
+
+
         model_path = Path(__file__).resolve().parent / settings.model_folder / settings.model_filename
         if not model_path.exists():
             raise FileNotFoundError(f"Model file not found at '{model_path}'")
