@@ -22,13 +22,19 @@ def create_app() -> FastAPI:
             str(settings.frontend_url),
             "http://localhost:5173",
             "http://127.0.0.1:5173",
-            "http://10.200.4.241:5173"
+            "http://10.200.4.241:5173",
+             "https://atliq-agriculture.vercel.app",
         ],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
     )
     app.include_router(api_router)
+    @app.get("/")
+    async def root():
+        return {
+            "message": "Tomato Disease Classification API is running successfully "
+        }
     @app.on_event("startup")
     async def startup_event() -> None:
         model_path = Path(__file__).resolve().parent / settings.model_folder / settings.model_filename
