@@ -10,7 +10,7 @@ import { DiseaseInfo } from "../components/DiseaseInfo";
 import { Loader } from "../components/Loader";
 import { ErrorMessage } from "../components/ErrorMessage";
 
-const API_BASE = ((import.meta as any).env?.VITE_API_BASE as string) || "https://tomato-disease-api.onrender.com/api/v1";
+const API_BASE = import.meta.env.VITE_API_BASE || "https://atliq-agriculture.onrender.com/api/v1";
 
 interface GradCAMResponse {
   predicted_disease: string; confidence: number; confidence_percentage: number;
