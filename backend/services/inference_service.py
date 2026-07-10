@@ -77,10 +77,6 @@ class InferenceService:
 
         heatmap_results = self.gradcam.generate_gradcam(preprocessed, original_image)
         
-        original_base64 = self._image_to_base64(original_image)
-        heatmap_base64 = self._image_to_base64(
-            Image.fromarray(heatmap_results["heatmap"])
-        )
         overlay_base64 = self._image_to_base64(
             Image.fromarray(heatmap_results["superimposed"])
         )
@@ -99,10 +95,8 @@ class InferenceService:
             "confidence_percentage": result["confidence_percentage"],
             "top_predictions": top_predictions,
             "inference_time": result["inference_time"],
-        "original_image": original_base64,
-        "heatmap_image": heatmap_base64,
-        "overlay_image": overlay_base64,
-    }
+            "overlay_image": overlay_base64,
+        }
 
     def get_disease_info(self, disease_name: str) -> Optional[Dict[str, Any]]:
         # Robust lookup: accept frontend variants (spaces, underscores, hyphens,
