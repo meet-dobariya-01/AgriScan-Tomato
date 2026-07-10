@@ -17,7 +17,7 @@ const About = () => (
       <p className="text-sm text-[#374151] mt-2 leading-relaxed max-w-2xl">
         A <span className="font-semibold text-[#15803D]">production-ready application</span> built by{" "}
         <span className="font-semibold">AtliQ Agriculture</span> for detecting tomato leaf diseases using deep learning.
-        Upload a tomato leaf image and get instant diagnosis with Grad-CAM visual explainability.
+        Upload a tomato leaf image and get instant diagnosis.
       </p>
     </motion.div>
 
@@ -31,7 +31,7 @@ const About = () => (
         <div className="space-y-3">
           {[
             { text: "Accurate disease classification using EfficientNet-B0", sub: "Transfer learning on 25,000+ images" },
-            { text: "Grad-CAM visualization for model interpretability", sub: "Visual heatmaps showing decision regions" },
+            // { text: "Grad-CAM visualization for model interpretability", sub: "Visual heatmaps showing decision regions" },
             { text: "Detailed disease information & treatment", sub: "Symptoms, causes, prevention guides" },
           ].map(({ text, sub }) => (
             <div key={text} className="flex items-start gap-3 p-3 rounded-xl bg-[#F9FAFB] border border-[#E5E7EB]">
@@ -53,7 +53,7 @@ const About = () => (
           {[
             { label: "Deep Learning",    value: "TensorFlow / Keras" },
             { label: "Architecture",     value: "EfficientNet-B0 (Transfer Learning)" },
-            { label: "Visualization",    value: "Grad-CAM, OpenCV" },
+            // { label: "Visualization",    value: "Grad-CAM, OpenCV" },
             { label: "Backend",          value: "FastAPI + Uvicorn" },
             { label: "Image Processing", value: "PIL, NumPy" },
           ].map(({ label, value }) => (
