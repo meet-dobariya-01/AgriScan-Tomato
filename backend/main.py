@@ -1,4 +1,4 @@
-﻿import os
+import os
 import logging
 from pathlib import Path
 from fastapi import FastAPI, Request
@@ -24,6 +24,7 @@ def create_app() -> FastAPI:
             "http://127.0.0.1:5173",
             "http://10.200.4.241:5173",
              "https://atliq-agriculture.vercel.app",
+             "https://atliq-agriculture-ruddy.vercel.app"
         ],
         allow_credentials=True,
         allow_methods=["*"],
