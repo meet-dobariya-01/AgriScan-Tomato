@@ -23,8 +23,7 @@ def create_app() -> FastAPI:
             "http://localhost:5173",
             "http://127.0.0.1:5173",
             "http://10.200.4.241:5173",
-             "https://agrovision.vercel.app",
-             "https://agrovision-ruddy.vercel.app"
+            "https://agrovision-tomato-disease-classifire.vercel.app"
         ],
         allow_credentials=True,
         allow_methods=["*"],

@@ -4,8 +4,8 @@ AgroVision is a web-based system for detecting tomato leaf diseases from uploade
 
 ## Live Demo
 
-- **Frontend**: [https://agrovision.vercel.app](https://agrovision.vercel.app)
-- **Backend API**: [https://agrovision.onrender.com](https://agrovision.onrender.com)
+- **Frontend**: [https://agrovision-tomato-disease-classifire.vercel.app](https://agrovision-tomato-disease-classifire.vercel.app)
+- **Backend API**: [https://tomato-disease-api-gzsp.onrender.com](https://tomato-disease-api-gzsp.onrender.com)
 
 ## What the project does
 
