@@ -44,11 +44,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
           <div className="hidden sm:block leading-tight">
             <span className="font-bold text-[15px] text-[#111827] tracking-tight"
               style={{ fontFamily: "Poppins, sans-serif" }}>
-              AtliQ
+              Agro
             </span>
             <span className="font-bold text-[15px] text-[#15803D] tracking-tight ml-1"
               style={{ fontFamily: "Poppins, sans-serif" }}>
-              Agriculture
+              Vision
             </span>
           </div>
         </Link>

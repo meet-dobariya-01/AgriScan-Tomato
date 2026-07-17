@@ -68,7 +68,7 @@ const Home: React.FC<HomeProps> = ({ addEntry }) => {
         <div>
           <div className="flex items-center gap-2 mb-1">
             <Sparkles size={13} className="text-[#16A34A]" />
-            <span className="text-[10px] font-bold text-[#16A34A] uppercase tracking-widest">AtliQ Agriculture · EfficientNet-B0</span>
+            <span className="text-[10px] font-bold text-[#16A34A] uppercase tracking-widest">AgroVision · EfficientNet-B0</span>
           </div>
           <h1 className="text-xl font-bold text-[#111827]" style={{ fontFamily: "Poppins, sans-serif" }}>
             Tomato Leaf Disease Diagnosis

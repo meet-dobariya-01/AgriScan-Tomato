@@ -1,6 +1,11 @@
-# Atliq Agriculture
+# AgroVision
 
-Atliq Agriculture is a web-based system for detecting tomato leaf diseases from uploaded images. The goal is to help users identify crop issues early and make faster decisions about plant health.
+AgroVision is a web-based system for detecting tomato leaf diseases from uploaded images. The goal is to help users identify crop issues early and make faster decisions about plant health.
+
+## Live Demo
+
+- **Frontend**: [https://agrovision.vercel.app](https://agrovision.vercel.app)
+- **Backend API**: [https://agrovision.onrender.com](https://agrovision.onrender.com)
 
 ## What the project does
 

@@ -5,7 +5,7 @@ import { Brain, Layers, LayoutGrid, HardDrive, GitBranch, Zap, Server, FlaskConi
 import { Loader } from "../components/Loader";
 import { ErrorMessage } from "../components/ErrorMessage";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "https://atliq-agriculture.onrender.com/api/v1";
+const API_BASE = import.meta.env.VITE_API_BASE || "https://agrovision.onrender.com/api/v1";
 interface ModelData { model_name: string; input_shape: number[]; num_classes: number; model_size_mb: number; total_params: number | null; }
 
 const stagger = { hidden: { opacity: 0 }, show: { opacity: 1, transition: { staggerChildren: 0.07 } } };

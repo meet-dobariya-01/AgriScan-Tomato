@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { AlertCircle, Bug, ShieldCheck, Stethoscope } from "lucide-react";
 import axios from "axios";
 
-const API_BASE = import.meta.env.VITE_API_BASE || "https://atliq-agriculture.onrender.com/api/v1";
+const API_BASE = import.meta.env.VITE_API_BASE || "https://agrovision.onrender.com/api/v1";
 
 interface DiseaseData {
   name: string; scientific_name: string; description: string;

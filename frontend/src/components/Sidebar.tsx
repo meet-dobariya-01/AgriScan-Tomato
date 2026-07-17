@@ -73,7 +73,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open }) => {
             <div className="rounded-xl bg-[#F0FDF4] border border-[#BBF7D0] p-3">
               <div className="flex items-center gap-2 mb-1">
                 <BrandLogo />
-                <span className="text-xs font-semibold text-[#15803D]">AtliQ Agriculture</span>
+                <span className="text-xs font-semibold text-[#15803D]">AgroVision</span>
               </div>
               <p className="text-[10px] text-[#6B7280]">EfficientNet-B0 · 11 disease classes</p>
             </div>

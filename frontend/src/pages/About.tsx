@@ -16,7 +16,7 @@ const About = () => (
       </h1>
       <p className="text-sm text-[#374151] mt-2 leading-relaxed max-w-2xl">
         A <span className="font-semibold text-[#15803D]">production-ready application</span> built by{" "}
-        <span className="font-semibold">AtliQ Agriculture</span> for detecting tomato leaf diseases using deep learning.
+        <span className="font-semibold">AgroVision</span> for detecting tomato leaf diseases using deep learning.
         Upload a tomato leaf image and get instant diagnosis.
       </p>
     </motion.div>

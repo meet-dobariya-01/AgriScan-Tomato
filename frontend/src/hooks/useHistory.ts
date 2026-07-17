@@ -9,7 +9,7 @@ export interface HistoryEntry {
   timestamp: string;
 }
 
-const STORAGE_KEY = "atliq_scan_history";
+const STORAGE_KEY = "agrovision_scan_history";
 const MAX_ENTRIES = 20;
 
 const load = (): HistoryEntry[] => {
